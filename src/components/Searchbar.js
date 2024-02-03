@@ -23,6 +23,7 @@ const Searchbar = ({ setExercises, bodyPart, setBodyPart }) => {
 				"https://exercisedb.p.rapidapi.com/exercises",
 				exerciseOptions
 			);
+			// console.log(exersicesData);
 			const serarchedExersises = exersicesData.filter(
 				(exrcise) =>
 					exrcise.name.toLowerCase().includes(search) ||
@@ -30,6 +31,7 @@ const Searchbar = ({ setExercises, bodyPart, setBodyPart }) => {
 					exrcise.bodyPart.toLowerCase().includes(search) ||
 					exrcise.equipment.toLowerCase().includes(search)
 			);
+			// console.log(serarchedExersises);
 			setSearch("");
 			setExercises(serarchedExersises);
 		}
