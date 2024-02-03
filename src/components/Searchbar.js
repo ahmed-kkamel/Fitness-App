@@ -1,43 +1,39 @@
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchData, exerciseOptions } from "../utils/fetchData";
+import HorizontalScrollbar from "./HorizontalScrollbar";
 const Searchbar = () => {
 	const [search, setSearch] = useState("");
+	const [exercises, setExercises] = useState([]);
+	const [bodyParts, setBodyParts] = useState([]);
+
+	useEffect(() => {
+		const fetchDataExercises = async () => {
+			const bodyPartsData = await fetchData(
+				"https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
+				exerciseOptions
+			);
+			setBodyParts(["all", ...bodyPartsData]);
+		};
+	}, []);
+
 	const handleSearch = async () => {
 		if (search) {
 			const exersicesData = await fetchData(
-				"https://exercisedb.p.rapidapi.com/exercises/bodyPart/back",
+				"https://exercisedb.p.rapidapi.com/exercises",
 				exerciseOptions
 			);
-			console.log(exersicesData);
+			const serarchedExersises = exersicesData.filter(
+				(exrcise) =>
+					exrcise.name.toLowerCase().includes(search) ||
+					exrcise.target.toLowerCase().includes(search) ||
+					exrcise.bodyPart.toLowerCase().includes(search) ||
+					exrcise.equipment.toLowerCase().includes(search)
+			);
+			setSearch("");
+			setExercises(serarchedExersises);
 		}
 	};
-	// const handleSearch = async () => {
-	// 	if (search) {
-	// 		try {
-	// 			const res = await fetch(
-	// 				"https://exercisedb.p.rapidapi.com/exercises/bodyPart/back",
-	// 				{
-	// 					method: "GET",
-	// 					headers: {
-	// 						"X-RapidAPI-Key":
-	// 							"0fad249527msh1c467e740e63b9ap1fe8a3jsnbd1275940d93",
-	// 						"X-RapidAPI-Host": "exercisedb.p.rapidapi.com",
-	// 					},
-	// 				}
-	// 			);
-
-	// 			if (!res.ok) {
-	// 				throw new Error(`HTTP error! Status: ${res.status}`);
-	// 			}
-
-	// 			const data = await res.json();
-	// 			console.log(data);
-	// 		} catch (error) {
-	// 			console.error("Error fetching data:", error);
-	// 		}
-	// 	}
-	// };
 
 	return (
 		<Stack alignItems="center" mt="37px" justifyContent="center" p="20px">
@@ -81,6 +77,14 @@ const Searchbar = () => {
 				>
 					Search
 				</Button>
+			</Box>
+			<Box sx={{ position: "relative", width: "100%", p: "20px" }}>
+				<HorizontalScrollbar
+					data={bodyParts}
+					bodyParts
+					setBodyPart={setBodyParts}
+					bodyPart={bodyParts}
+				/>
 			</Box>
 		</Stack>
 	);
