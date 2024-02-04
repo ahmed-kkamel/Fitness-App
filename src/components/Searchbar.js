@@ -12,6 +12,7 @@ const Searchbar = ({ setExercises, bodyPart, setBodyPart }) => {
 				"https://exercisedb.p.rapidapi.com/exercises/bodyPartList",
 				exerciseOptions
 			);
+			// console.log(bodyPartsData);
 			setBodyParts(["all", ...bodyPartsData]);
 		};
 		fetchDataExercises();
