@@ -19,4 +19,6 @@ The basic subscription plan to Rapid API imposes a 100-request limit, so the pro
 
 ### Rapid API links:
 ExerciseDB API: https://rapidapi.com/justin-WFnsXH_t6/api/exercisedb
+
+
 YouTube Search and Download API: https://rapidapi.com/h0p3rwe/api/youtube-search-and-download/
