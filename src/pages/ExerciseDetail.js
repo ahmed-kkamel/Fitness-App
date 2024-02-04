@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Detail from "../components/Detail";
 import ExerciseVideos from "../components/ExerciseVideos";
-import SimilarExercises from "../components/SimilarExercises";
+// import SimilarExercises from "../components/SimilarExercises";
 import { useParams } from "react-router-dom";
 import { fetchData, exerciseOptions, YoutubeOptions } from "../utils/fetchData";
 const ExerciseDetail = () => {
